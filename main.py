@@ -4,6 +4,7 @@ import shutil
 from PIL import Image
 import glob
 import webp
+import Augmentor
 
 
 def counter(dir):
@@ -182,10 +183,32 @@ def image_type_converter(base_dir, imgtype = 'jpeg'):
   
   print('done hehe')
 
+def augmenters(path, sample):
+  """
+    Augment images
 
+    Args:
+        path (str): The path to the image directory.
+        sample (int): how many outputs of augmented images are needed.
+    """
+  if type(sample) != int:
+    print('sample is not an integer')
+    return None
+  if not os.path.exists(path):
+    print("path doesn't exist")
+    return None
+
+  p = Augmentor.Pipeline(path)
+  p.flip_left_right(0.5)
+  p.black_and_white(0.1)
+  p.rotate(0.3, 10, 10)
+  p.skew(0.4, 0.5)
+  p.zoom(probability = 0.2, min_factor = 1.1, max_factor = 1.5)
+  p.sample(sample)
 
 if __name__ == '__main__':
   
  #codes here
  a = 1 + 1
 
+imageDownloader(['tomato'], './images', 3)
