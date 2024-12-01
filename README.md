@@ -22,5 +22,5 @@ venv\Scripts\Activate.ps1
 ```
 Install the required libraries
 ```bash
-pip install -r requirements. txt
+pip install -r requirements.txt
 ```
